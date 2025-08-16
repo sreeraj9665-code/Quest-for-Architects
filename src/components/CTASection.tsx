@@ -10,7 +10,7 @@ export const CTASection = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    workLink: ''
+    phoneNumber: ''
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
@@ -27,7 +27,7 @@ export const CTASection = () => {
       description: "Welcome to the quest. We'll be in touch soon.",
     });
 
-    setFormData({ name: '', email: '', workLink: '' });
+    setFormData({ name: '', email: '', phoneNumber: '' });
     setIsSubmitting(false);
   };
 
@@ -90,18 +90,18 @@ export const CTASection = () => {
                 </div>
 
                 <div className="space-y-2 text-left">
-                  <Label htmlFor="workLink" className="font-rajdhani font-bold text-foreground">
-                    Link to your work (LinkedIn/GitHub)
+                  <Label htmlFor="phoneNumber" className="font-rajdhani font-bold text-foreground">
+                    Phone Number
                   </Label>
                   <Input
-                    id="workLink"
-                    name="workLink"
-                    type="url"
-                    value={formData.workLink}
+                    id="phoneNumber"
+                    name="phoneNumber"
+                    type="tel"
+                    value={formData.phoneNumber}
                     onChange={handleChange}
                     required
                     className="bg-input border-border focus:border-primary focus:ring-primary font-rajdhani"
-                    placeholder="https://linkedin.com/in/yourprofile"
+                    placeholder="+91 9876543210"
                   />
                 </div>
 

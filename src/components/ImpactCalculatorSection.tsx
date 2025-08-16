@@ -12,36 +12,36 @@ export const ImpactCalculatorSection = () => {
   const [formData, setFormData] = useState({
     taskName: '',
     timeMinutes: '',
-    frequency: '',
-    monthlySalary: ''
+    timesPerMonth: '',
+    monthlySalary: '',
+    workHoursPerDay: '8'
   });
   const [showResults, setShowResults] = useState(false);
-  const [roiPercentage, setRoiPercentage] = useState([300]);
+  const [paybackPeriod, setPaybackPeriod] = useState([12]);
   
   const calculateResults = () => {
     const minutes = parseFloat(formData.timeMinutes) || 0;
     const salary = parseFloat(formData.monthlySalary) || 0;
+    const timesPerMonth = parseFloat(formData.timesPerMonth) || 0;
+    const workHoursPerDay = parseFloat(formData.workHoursPerDay) || 8;
     
-    let tasksPerYear = 0;
-    switch (formData.frequency) {
-      case 'daily':
-        tasksPerYear = 365;
-        break;
-      case 'weekly':
-        tasksPerYear = 52;
-        break;
-      case 'monthly':
-        tasksPerYear = 12;
-        break;
-    }
+    // Assume 22 working days in a month
+    const hourlyRate = salary / (workHoursPerDay * 22);
     
-    const annualHours = (minutes * tasksPerYear) / 60;
-    const hourlyRate = (salary * 12) / (40 * 52); // Monthly salary to hourly
-    const annualCostSavings = annualHours * hourlyRate;
-    const automationPrice = annualCostSavings / (roiPercentage[0] / 100);
+    // Total annual hours = (minutes / 60) * (times per month * 12)
+    const totalAnnualHours = (minutes / 60) * (timesPerMonth * 12);
+    
+    // Annual cost savings = total annual hours * hourly rate
+    const annualCostSavings = totalAnnualHours * hourlyRate;
+    
+    // Monthly cost savings = annual cost savings / 12
+    const monthlyCostSavings = annualCostSavings / 12;
+    
+    // Automation price = monthly cost savings * payback period (months)
+    const automationPrice = monthlyCostSavings * paybackPeriod[0];
     
     return {
-      annualHours: Math.round(annualHours),
+      annualHours: Math.round(totalAnnualHours),
       annualCostSavings: Math.round(annualCostSavings),
       automationPrice: Math.round(automationPrice)
     };
@@ -100,19 +100,18 @@ export const ImpactCalculatorSection = () => {
                   </div>
 
                   <div className="space-y-2">
-                    <Label className="font-rajdhani font-bold text-foreground">
-                      How Often is this Task Done?
+                    <Label htmlFor="timesPerMonth" className="font-rajdhani font-bold text-foreground">
+                      How many times is this task done per month?
                     </Label>
-                    <Select onValueChange={(value) => setFormData(prev => ({ ...prev, frequency: value }))}>
-                      <SelectTrigger className="bg-input border-border focus:border-primary font-rajdhani">
-                        <SelectValue placeholder="Select frequency" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="daily">Per Day</SelectItem>
-                        <SelectItem value="weekly">Per Week</SelectItem>
-                        <SelectItem value="monthly">Per Month</SelectItem>
-                      </SelectContent>
-                    </Select>
+                    <Input
+                      id="timesPerMonth"
+                      type="number"
+                      value={formData.timesPerMonth}
+                      onChange={(e) => setFormData(prev => ({ ...prev, timesPerMonth: e.target.value }))}
+                      required
+                      className="bg-input border-border focus:border-primary font-rajdhani"
+                      placeholder="20"
+                    />
                   </div>
 
                   <div className="space-y-2">
@@ -127,6 +126,21 @@ export const ImpactCalculatorSection = () => {
                       required
                       className="bg-input border-border focus:border-primary font-rajdhani"
                       placeholder="50000"
+                    />
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="workHoursPerDay" className="font-rajdhani font-bold text-foreground">
+                      Average Work Hours per Day for this Employee
+                    </Label>
+                    <Input
+                      id="workHoursPerDay"
+                      type="number"
+                      value={formData.workHoursPerDay}
+                      onChange={(e) => setFormData(prev => ({ ...prev, workHoursPerDay: e.target.value }))}
+                      required
+                      className="bg-input border-border focus:border-primary font-rajdhani"
+                      placeholder="8"
                     />
                   </div>
 
@@ -158,14 +172,14 @@ export const ImpactCalculatorSection = () => {
                   <div className="space-y-6">
                     <div>
                       <Label className="font-rajdhani font-bold text-foreground text-lg mb-4 block">
-                        Client's First-Year ROI: {roiPercentage[0]}%
+                        Client's Payback Period: {paybackPeriod[0]} months
                       </Label>
                       <Slider
-                        value={roiPercentage}
-                        onValueChange={setRoiPercentage}
-                        max={1000}
-                        min={100}
-                        step={50}
+                        value={paybackPeriod}
+                        onValueChange={setPaybackPeriod}
+                        max={24}
+                        min={1}
+                        step={1}
                         className="w-full"
                       />
                     </div>
