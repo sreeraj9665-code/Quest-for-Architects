@@ -1,9 +1,7 @@
 import { ScrollSection } from './ScrollSection';
 import { NumberCounter } from './NumberCounter';
-
 export const SolutionSection = () => {
-  return (
-    <section className="py-32 px-6 bg-card relative">
+  return <section className="py-32 px-6 bg-card relative">
       <div className="absolute inset-0 bg-gradient-primary opacity-10"></div>
       
       <div className="max-w-6xl mx-auto text-center relative z-10">
@@ -28,13 +26,10 @@ export const SolutionSection = () => {
               <div className="text-8xl md:text-9xl font-orbitron font-black mb-4">
                 <NumberCounter endValue={48} />
               </div>
-              <p className="font-rajdhani text-2xl md:text-3xl text-muted-foreground font-bold">
-                Hours to Deploy
-              </p>
+              <p className="font-rajdhani text-2xl md:text-3xl text-muted-foreground font-bold">Hours to Deploy a Solution</p>
             </div>
           </div>
         </ScrollSection>
       </div>
-    </section>
-  );
+    </section>;
 };
