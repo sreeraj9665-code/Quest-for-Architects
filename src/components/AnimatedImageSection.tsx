@@ -12,17 +12,17 @@ export const AnimatedImageSection = () => {
   
   return (
     <section ref={ref} className="relative w-full overflow-hidden">
-      {/* Responsive container - better mobile handling */}
-      <div className="relative h-[60vh] sm:h-[70vh] md:h-[80vh] lg:h-screen w-full">
-        <motion.div 
+      {/* Responsive container - prevent cropping on mobile/tablet */}
+      <div className="relative h-[50vh] sm:h-[60vh] md:h-[70vh] lg:h-screen w-full flex items-center justify-center">
+        <motion.div
           style={{ 
             y,
             backgroundImage: 'url(/lovable-uploads/91d9b4e2-964a-41d3-984f-3a85b4384e05.png)',
-            backgroundSize: 'cover',
+            backgroundSize: 'contain',
             backgroundPosition: 'center',
             backgroundRepeat: 'no-repeat'
           }}
-          className="absolute inset-0 scale-110"
+          className="absolute inset-0 sm:bg-contain md:bg-cover scale-110"
         />
         {/* Gradient overlay for better text readability if needed */}
         <div className="absolute inset-0 bg-gradient-to-b from-background/20 via-transparent to-background/20" />
