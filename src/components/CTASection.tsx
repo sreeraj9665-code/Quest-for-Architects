@@ -24,7 +24,7 @@ export const CTASection = () => {
 
     toast({
       title: "Application Received",
-      description: "Welcome to the quest. We'll be in touch soon.",
+      description: "Welcome to the quest. We'll discuss your application soon.",
     });
 
     setFormData({ name: '', email: '', phoneNumber: '' });
