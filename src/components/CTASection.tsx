@@ -57,7 +57,7 @@ export const CTASection = () => {
         <ScrollSection delay={0.6}>
           <Card className="max-w-2xl mx-auto bg-background/80 backdrop-blur-sm border-primary/30 shadow-glow">
             <CardContent className="p-8">
-              <form onSubmit={handleSubmit} className="space-y-6">
+              <form onSubmit={handleSubmit} name="contact" method="POST" data-netlify="true" className="space-y-6">
                 <div className="space-y-2 text-left">
                   <Label htmlFor="name" className="font-rajdhani font-bold text-foreground">
                     Name
@@ -110,7 +110,7 @@ export const CTASection = () => {
                   disabled={isSubmitting}
                   className="w-full font-orbitron font-bold text-lg py-6 bg-primary text-primary-foreground hover:shadow-neon transition-all duration-300 disabled:opacity-50"
                 >
-                  {isSubmitting ? 'PROCESSING...' : "[I'M READY TO BUILD]"}
+                  {isSubmitting ? 'PROCESSING...' : "I'M READY TO BUILD"}
                 </Button>
               </form>
             </CardContent>

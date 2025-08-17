@@ -51,7 +51,7 @@ export const HeroSection = () => {
             size="lg"
             className="font-orbitron font-bold text-lg px-12 py-6 bg-primary text-primary-foreground hover:shadow-neon transition-all duration-300 animate-glow-pulse"
           >
-            [DISCOVER THE MISSION]
+            DISCOVER THE MISSION
           </Button>
         </motion.div>
       </div>

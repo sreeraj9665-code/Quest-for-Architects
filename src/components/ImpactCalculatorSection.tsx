@@ -148,7 +148,7 @@ export const ImpactCalculatorSection = () => {
                     type="submit"
                     className="w-full font-orbitron font-bold text-lg py-6 bg-primary text-primary-foreground hover:shadow-neon transition-all duration-300"
                   >
-                    [CALCULATE IMPACT]
+                    CALCULATE IMPACT
                   </Button>
                 </form>
               ) : (
