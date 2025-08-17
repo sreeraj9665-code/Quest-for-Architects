@@ -65,6 +65,7 @@ export const CTASection = () => {
           <Card className="max-w-2xl mx-auto bg-background/80 backdrop-blur-sm border-primary/30 shadow-glow">
             <CardContent className="p-8">
               <form onSubmit={handleSubmit} name="contact" method="POST" data-netlify="true" className="space-y-6">
+                <input type="hidden" name="form-name" value="contact" />
                 <div className="space-y-2 text-left">
                   <Label htmlFor="name" className="font-rajdhani font-bold text-foreground">
                     Name
