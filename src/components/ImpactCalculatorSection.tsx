@@ -184,10 +184,19 @@ export const ImpactCalculatorSection = () => {
                       />
                     </div>
 
-                    <div className="text-center p-8 bg-gradient-primary/10 rounded-lg border border-primary/30">
-                      <h3 className="font-orbitron font-bold text-2xl text-foreground mb-4">Your One-Time Automation Price</h3>
-                      <div className="text-5xl font-orbitron font-black text-primary">
-                        ₹{results.automationPrice.toLocaleString()}
+                    <div className="text-center p-8 bg-gradient-primary/10 rounded-lg border border-primary/30 space-y-6">
+                      <div>
+                        <h3 className="font-orbitron font-bold text-2xl text-foreground mb-4">Suggested Total Price (for this Payback Period)</h3>
+                        <div className="text-5xl font-orbitron font-black text-primary">
+                          ₹{results.automationPrice.toLocaleString()}
+                        </div>
+                      </div>
+                      
+                      <div className="border-t border-primary/20 pt-6">
+                        <h4 className="font-orbitron font-bold text-xl text-foreground mb-3">Equivalent Monthly Installment (for 12 months)</h4>
+                        <div className="text-3xl font-orbitron font-black text-primary">
+                          ₹{Math.round(results.automationPrice / 12).toLocaleString()}
+                        </div>
                       </div>
                     </div>
                   </div>

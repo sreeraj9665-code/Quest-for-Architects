@@ -22,14 +22,14 @@ export const YourRoleSection = () => {
       number: 3,
       icon: Zap,
       title: "Forge the Automation",
-      description: "Bring the validated Blueprint to me, the Prime Architect. We will collaborate directly. You'll provide the client context, and we will forge the custom Automation together in 48 hours - A weekend.",
+      description: "Bring the validated Blueprint to me, the Founding Prime Architect. We will collaborate directly. You'll provide the client context, and we will forge the custom Automation together in 48 hours - A weekend.",
       delay: 0.7
     },
     {
       number: 4,
       icon: Award,
       title: "Claim Your Legacy",
-      description: "Upon successful deployment, you will have solved a real business problem and officially claimed your 0.1% equity stake. Your name and achievement will be one step closer to being immortalized in the \"Founding Ten.\"",
+      description: "Upon successful deployment, you will have solved a real business problem and officially claimed your 0.2% equity stake. Your name and achievement will be one step closer to being immortalized in the \"Founding Ten.\"",
       delay: 0.9
     }
   ];

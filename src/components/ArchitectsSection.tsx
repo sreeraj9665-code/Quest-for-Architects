@@ -25,7 +25,7 @@ export const ArchitectsSection = () => {
                   </Avatar>
                 </div>
                 <h3 className="font-orbitron font-bold text-2xl text-foreground mb-2">
-                  PRIME ARCHITECT
+                  FOUNDING PRIME ARCHITECT
                 </h3>
                 <p className="font-rajdhani text-lg text-muted-foreground leading-relaxed">
                   The visionary leading the revolution against inefficiency. 
@@ -40,7 +40,7 @@ export const ArchitectsSection = () => {
         <ScrollSection delay={0.6}>
           <div className="text-center mb-12">
             <h3 className="font-orbitron font-bold text-3xl text-foreground mb-4">
-              OPTIMUS ARCHITECTS
+              FOUNDING ARCHITECTS
             </h3>
             <p className="font-rajdhani text-xl text-muted-foreground">
               Nine founding positions await the right architects

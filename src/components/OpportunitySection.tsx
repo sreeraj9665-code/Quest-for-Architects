@@ -13,7 +13,7 @@ export const OpportunitySection = () => {
     {
       icon: TrendingUp,
       title: "Equity",
-      description: "True ownership. Earn a stake in the entire company for every successful project you help build. No investment needed.",
+      description: "True ownership. Earn a 0.2% stake per successful project in the entire company. No investment needed.",
       delay: 0.5
     },
     {
