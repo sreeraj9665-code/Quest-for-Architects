@@ -7,6 +7,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Slider } from '@/components/ui/slider';
 import { Card, CardContent } from '@/components/ui/card';
 import { NumberCounter } from './NumberCounter';
+
 export const ImpactCalculatorSection = () => {
   const [formData, setFormData] = useState({
     taskName: '',
@@ -17,38 +18,44 @@ export const ImpactCalculatorSection = () => {
   });
   const [showResults, setShowResults] = useState(false);
   const [paybackPeriod, setPaybackPeriod] = useState([12]);
+  
   const calculateResults = () => {
     const minutes = parseFloat(formData.timeMinutes) || 0;
     const salary = parseFloat(formData.monthlySalary) || 0;
     const timesPerMonth = parseFloat(formData.timesPerMonth) || 0;
     const workHoursPerDay = parseFloat(formData.workHoursPerDay) || 8;
-
+    
     // Assume 22 working days in a month
     const hourlyRate = salary / (workHoursPerDay * 22);
-
+    
     // Total annual hours = (minutes / 60) * (times per month * 12)
-    const totalAnnualHours = minutes / 60 * (timesPerMonth * 12);
-
+    const totalAnnualHours = (minutes / 60) * (timesPerMonth * 12);
+    
     // Annual cost savings = total annual hours * hourly rate
     const annualCostSavings = totalAnnualHours * hourlyRate;
-
+    
     // Monthly cost savings = annual cost savings / 12
     const monthlyCostSavings = annualCostSavings / 12;
-
+    
     // Automation price = monthly cost savings * payback period (months)
     const automationPrice = monthlyCostSavings * paybackPeriod[0];
+    
     return {
       annualHours: Math.round(totalAnnualHours),
       annualCostSavings: Math.round(annualCostSavings),
       automationPrice: Math.round(automationPrice)
     };
   };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setShowResults(true);
   };
+
   const results = showResults ? calculateResults() : null;
-  return <section id="impact-calculator" className="py-32 px-6 bg-card relative">
+
+  return (
+    <section id="impact-calculator" className="py-32 px-6 bg-card relative">
       <div className="absolute inset-0 bg-gradient-primary opacity-5"></div>
       
       <div className="max-w-4xl mx-auto relative z-10">
@@ -61,59 +68,91 @@ export const ImpactCalculatorSection = () => {
         <ScrollSection delay={0.3}>
           <Card className="bg-background/80 backdrop-blur-sm border-border shadow-premium">
             <CardContent className="p-8">
-              {!showResults ? <form onSubmit={handleSubmit} className="space-y-6">
+              {!showResults ? (
+                <form onSubmit={handleSubmit} className="space-y-6">
                   <div className="space-y-2">
                     <Label htmlFor="taskName" className="font-rajdhani font-bold text-foreground">
                       Task Name
                     </Label>
-                    <Input id="taskName" value={formData.taskName} onChange={e => setFormData(prev => ({
-                  ...prev,
-                  taskName: e.target.value
-                }))} required className="bg-input border-border focus:border-primary font-rajdhani" placeholder="e.g., Monthly expense reports" />
+                    <Input
+                      id="taskName"
+                      value={formData.taskName}
+                      onChange={(e) => setFormData(prev => ({ ...prev, taskName: e.target.value }))}
+                      required
+                      className="bg-input border-border focus:border-primary font-rajdhani"
+                      placeholder="e.g., Monthly expense reports"
+                    />
                   </div>
 
                   <div className="space-y-2">
                     <Label htmlFor="timeMinutes" className="font-rajdhani font-bold text-foreground">
                       Time to Complete Task (in minutes)
                     </Label>
-                    <Input id="timeMinutes" type="number" value={formData.timeMinutes} onChange={e => setFormData(prev => ({
-                  ...prev,
-                  timeMinutes: e.target.value
-                }))} required className="bg-input border-border focus:border-primary font-rajdhani" placeholder="120" />
+                    <Input
+                      id="timeMinutes"
+                      type="number"
+                      value={formData.timeMinutes}
+                      onChange={(e) => setFormData(prev => ({ ...prev, timeMinutes: e.target.value }))}
+                      required
+                      className="bg-input border-border focus:border-primary font-rajdhani"
+                      placeholder="120"
+                    />
                   </div>
 
                   <div className="space-y-2">
                     <Label htmlFor="timesPerMonth" className="font-rajdhani font-bold text-foreground">
                       How many times is this task done per month?
                     </Label>
-                    <Input id="timesPerMonth" type="number" value={formData.timesPerMonth} onChange={e => setFormData(prev => ({
-                  ...prev,
-                  timesPerMonth: e.target.value
-                }))} required className="bg-input border-border focus:border-primary font-rajdhani" placeholder="20" />
+                    <Input
+                      id="timesPerMonth"
+                      type="number"
+                      value={formData.timesPerMonth}
+                      onChange={(e) => setFormData(prev => ({ ...prev, timesPerMonth: e.target.value }))}
+                      required
+                      className="bg-input border-border focus:border-primary font-rajdhani"
+                      placeholder="20"
+                    />
                   </div>
 
                   <div className="space-y-2">
                     <Label htmlFor="monthlySalary" className="font-rajdhani font-bold text-foreground">
                       Monthly Salary of Employee (in ₹)
                     </Label>
-                    <Input id="monthlySalary" type="number" value={formData.monthlySalary} onChange={e => setFormData(prev => ({
-                  ...prev,
-                  monthlySalary: e.target.value
-                }))} required className="bg-input border-border focus:border-primary font-rajdhani" placeholder="50000" />
+                    <Input
+                      id="monthlySalary"
+                      type="number"
+                      value={formData.monthlySalary}
+                      onChange={(e) => setFormData(prev => ({ ...prev, monthlySalary: e.target.value }))}
+                      required
+                      className="bg-input border-border focus:border-primary font-rajdhani"
+                      placeholder="50000"
+                    />
                   </div>
 
                   <div className="space-y-2">
                     <Label htmlFor="workHoursPerDay" className="font-rajdhani font-bold text-foreground">
                       Average Work Hours per Day for this Employee
                     </Label>
-                    <Input id="workHoursPerDay" type="number" value={formData.workHoursPerDay} onChange={e => setFormData(prev => ({
-                  ...prev,
-                  workHoursPerDay: e.target.value
-                }))} required className="bg-input border-border focus:border-primary font-rajdhani" placeholder="8" />
+                    <Input
+                      id="workHoursPerDay"
+                      type="number"
+                      value={formData.workHoursPerDay}
+                      onChange={(e) => setFormData(prev => ({ ...prev, workHoursPerDay: e.target.value }))}
+                      required
+                      className="bg-input border-border focus:border-primary font-rajdhani"
+                      placeholder="8"
+                    />
                   </div>
 
-                  <Button type="submit" className="w-full font-orbitron font-bold text-lg py-6 bg-primary text-primary-foreground hover:shadow-neon transition-all duration-300">CALCULATE IMPACT</Button>
-                </form> : <div className="space-y-8">
+                  <Button
+                    type="submit"
+                    className="w-full font-orbitron font-bold text-lg py-6 bg-primary text-primary-foreground hover:shadow-neon transition-all duration-300"
+                  >
+                    [CALCULATE IMPACT]
+                  </Button>
+                </form>
+              ) : (
+                <div className="space-y-8">
                   <div className="grid md:grid-cols-2 gap-8">
                     <div className="text-center p-6 bg-background/50 rounded-lg border border-primary/20">
                       <h3 className="font-orbitron font-bold text-xl text-foreground mb-4">Annual Hours Reclaimed</h3>
@@ -135,7 +174,14 @@ export const ImpactCalculatorSection = () => {
                       <Label className="font-rajdhani font-bold text-foreground text-lg mb-4 block">
                         Client's Payback Period: {paybackPeriod[0]} months
                       </Label>
-                      <Slider value={paybackPeriod} onValueChange={setPaybackPeriod} max={24} min={1} step={1} className="w-full" />
+                      <Slider
+                        value={paybackPeriod}
+                        onValueChange={setPaybackPeriod}
+                        max={24}
+                        min={1}
+                        step={1}
+                        className="w-full"
+                      />
                     </div>
 
                     <div className="text-center p-8 bg-gradient-primary/10 rounded-lg border border-primary/30">
@@ -146,13 +192,19 @@ export const ImpactCalculatorSection = () => {
                     </div>
                   </div>
 
-                  <Button onClick={() => setShowResults(false)} variant="outline" className="w-full font-rajdhani font-bold border-primary text-primary hover:bg-primary hover:text-primary-foreground">
+                  <Button
+                    onClick={() => setShowResults(false)}
+                    variant="outline"
+                    className="w-full font-rajdhani font-bold border-primary text-primary hover:bg-primary hover:text-primary-foreground"
+                  >
                     Calculate Another Task
                   </Button>
-                </div>}
+                </div>
+              )}
             </CardContent>
           </Card>
         </ScrollSection>
       </div>
-    </section>;
+    </section>
+  );
 };
