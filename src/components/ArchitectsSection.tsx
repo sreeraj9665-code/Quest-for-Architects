@@ -24,9 +24,7 @@ export const ArchitectsSection = () => {
                     <AvatarFallback className="bg-primary text-primary-foreground font-orbitron font-bold text-xl">Shree</AvatarFallback>
                   </Avatar>
                 </div>
-                <h3 className="font-orbitron font-bold text-2xl text-foreground mb-2">
-                  FOUNDING PRIME ARCHITECT
-                </h3>
+                <h3 className="font-orbitron font-bold text-2xl text-foreground mb-2">PRIME ARCHITECT</h3>
                 <p className="font-rajdhani text-lg text-muted-foreground leading-relaxed">
                   The visionary leading the revolution against inefficiency. 
                   Building the foundation for a future where humans focus on what truly matters.
