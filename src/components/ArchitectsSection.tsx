@@ -46,7 +46,7 @@ export const ArchitectsSection = () => {
           </div>
         </ScrollSection>
 
-        <div className="grid grid-cols-3 md:grid-cols-5 gap-6 max-w-4xl mx-auto">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 sm:gap-6 max-w-4xl mx-auto">
           {emptySlots.map((slot, index) => <ScrollSection key={slot} delay={0.8 + index * 0.1}>
               <Card className="aspect-square bg-secondary/30 border-primary/20 hover:border-primary/60 transition-all duration-300 animate-glow-pulse">
                 <CardContent className="p-4 h-full flex flex-col items-center justify-center text-center">
