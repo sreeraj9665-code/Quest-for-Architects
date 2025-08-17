@@ -15,20 +15,27 @@ export const CTASection = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    const myForm = e.target as HTMLFormElement;
+    const formData = new FormData(myForm);
 
-    toast({
-      title: "Application Received",
-      description: "Welcome to the quest. We'll discuss your application soon.",
-    });
-
-    setFormData({ name: '', email: '', phoneNumber: '' });
-    setIsSubmitting(false);
+    fetch("/", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: new URLSearchParams(formData as any).toString(),
+    })
+      .then(() => {
+        toast({
+          title: "Real Application Received!",
+          description: "Welcome to the quest. We'll discuss your application soon.",
+        });
+        setFormData({ name: '', email: '', phoneNumber: '' });
+      })
+      .catch((error) => alert(error))
+      .finally(() => setIsSubmitting(false));
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
