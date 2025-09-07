@@ -14,7 +14,8 @@ export const ImpactCalculatorSection = () => {
     timeMinutes: '',
     timesPerMonth: '',
     monthlySalary: '',
-    workHoursPerDay: '8'
+    workHoursPerDay: '8',
+    numberOfEmployees: '1'
   });
   const [showResults, setShowResults] = useState(false);
   const [paybackPeriod, setPaybackPeriod] = useState([12]);
@@ -24,12 +25,13 @@ export const ImpactCalculatorSection = () => {
     const salary = parseFloat(formData.monthlySalary) || 0;
     const timesPerMonth = parseFloat(formData.timesPerMonth) || 0;
     const workHoursPerDay = parseFloat(formData.workHoursPerDay) || 8;
+    const numberOfEmployees = parseFloat(formData.numberOfEmployees) || 1;
     
     // Assume 22 working days in a month
     const hourlyRate = salary / (workHoursPerDay * 22);
     
-    // Total annual hours = (minutes / 60) * (times per month * 12)
-    const totalAnnualHours = (minutes / 60) * (timesPerMonth * 12);
+    // Total annual hours = (minutes / 60) * (times per month * 12) * number of employees
+    const totalAnnualHours = (minutes / 60) * (timesPerMonth * 12) * numberOfEmployees;
     
     // Annual cost savings = total annual hours * hourly rate
     const annualCostSavings = totalAnnualHours * hourlyRate;
@@ -141,6 +143,22 @@ export const ImpactCalculatorSection = () => {
                       required
                       className="bg-input border-border focus:border-primary font-rajdhani"
                       placeholder="8"
+                    />
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="numberOfEmployees" className="font-rajdhani font-bold text-foreground">
+                      Number of Employees Doing This Task
+                    </Label>
+                    <Input
+                      id="numberOfEmployees"
+                      type="number"
+                      value={formData.numberOfEmployees}
+                      onChange={(e) => setFormData(prev => ({ ...prev, numberOfEmployees: e.target.value }))}
+                      required
+                      className="bg-input border-border focus:border-primary font-rajdhani"
+                      placeholder="1"
+                      min="1"
                     />
                   </div>
 
